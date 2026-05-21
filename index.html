@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Alee Asghar — Enterprise Growth & Customer Success</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* sophisticated color system – CSS variables for light/dark */
+        :root {
+            /* dark mode (default) */
+            --bg-primary: #0F1115;
+            --bg-surface: #161A22;
+            --bg-card: #1B202A;
+            --text-primary: #F3F2EF;
+            --text-muted: #A7B0C0;
+            --accent-navy: #2F4156;
+            --accent-bronze: #B08968;
+            --accent-sage: #7A8B7A;
+            --border-light: rgba(255,255,255,0.06);
+            --shadow-elegant: 0 20px 35px -12px rgba(0,0,0,0.4);
+            --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body.light {
+            --bg-primary: #F5F1EA;
+            --bg-surface: #FAF7F2;
+            --bg-card: #FFFFFF;
+            --text-primary: #121417;
+            --text-muted: #4B4E54;
+            --accent-navy: #3C5A7D;
+            --accent-bronze: #9B6A4A;
+            --accent-sage: #5F7161;
+            --border-light: rgba(0,0,0,0.06);
+            --shadow-elegant: 0 20px 30px -12px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.4;
+            transition: background-color 0.6s var(--transition-smooth), color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* typography – giant headlines + editorial serif */
+        h1, h2, .giant-serif {
+            font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 10vw, 6.5rem);
+            line-height: 1.1;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            max-width: 1000px;
+        }
+
+        .section-headline {
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .metric-number {
+            font-size: 3.8rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-bronze) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* cinematic background – animated mesh gradients + grain */
+        .bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.045'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+            mix-blend-mode: overlay;
+        }
+
+        /* smooth scroll & container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* navigation & theme toggle */
+        .nav {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 2rem 2rem 1rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .theme-toggle {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-light);
+            border-radius: 60px;
+            padding: 0.6rem 1.2rem;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            transition: all 0.4s var(--transition-smooth);
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.02);
+            background: var(--bg-card);
+            border-color: var(--accent-bronze);
+        }
+
+        /* hero section */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 4rem 0 6rem;
+        }
+
+        .hero-content {
+            max-width: 1100px;
+        }
+
+        .hero-greeting {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-bronze);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 1.8rem 0 2rem;
+            line-height: 1.5;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-bronze);
+            color: #0F1115;
+            border: none;
+            padding: 0.9rem 2rem;
+            font-weight: 600;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -10px rgba(176, 137, 104, 0.4);
+            background: #c49a6f;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-muted);
+            color: var(--text-primary);
+            padding: 0.9rem 2rem;
+            font-weight: 500;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-bronze);
+            transform: translateY(-2px);
+            background: rgba(176, 137, 104, 0.08);
+        }
+
+        /* editorial about section – asymmetrical */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            margin: 6rem 0;
+            align-items: start;
+        }
+
+        .about-statement {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            color: var(--accent-bronze);
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        /* experience cards – premium & magnetic */
+        .exp-card {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.45s var(--transition-smooth);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-elegant);
+        }
+
+        .exp-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-bronze);
+            box-shadow: 0 25px 40px -18px rgba(0,0,0,0.3);
+        }
+
+        .exp-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .exp-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .exp-company {
+            color: var(--accent-bronze);
+            font-weight: 500;
+        }
+
+        .exp-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .exp-list {
+            margin-top: 1rem;
+            list-style: none;
+        }
+
+        .exp-list li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.2rem;
+            position: relative;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .exp-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: var(--accent-bronze);
+        }
+
+        /* metrics grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 5rem 0;
+            text-align: center;
+        }
+
+        .metric-item {
+            background: var(--bg-surface);
+            padding: 2rem 1rem;
+            border-radius: 32px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+        }
+
+        .metric-item:hover {
+            transform: scale(1.02);
+            background: var(--bg-card);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-sage);
+            margin-top: 0.8rem;
+        }
+
+        /* skills – modern interactive chips */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 3rem 0 5rem;
+        }
+
+        .skill-chip {
+            background: var(--bg-surface);
+            padding: 0.8rem 1.6rem;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid var(--border-light);
+            transition: all 0.25s cubic-bezier(0.2,0.9,0.4,1.1);
+            cursor: default;
+        }
+
+        .skill-chip:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: var(--accent-navy);
+            color: white;
+            border-color: var(--accent-navy);
+        }
+
+        /* contact section */
+        .contact-section {
+            background: var(--bg-surface);
+            border-radius: 48px;
+            padding: 4rem;
+            margin: 6rem 0;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .contact-email {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        .social-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-bronze);
+            transition: all 0.2s;
+        }
+
+        /* scroll reveal animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* responsive */
+        @media (max-width: 800px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .container {
+                padding: 0 1.5rem;
+            }
+            .hero-title {
+                font-size: 3.2rem;
+            }
+            .contact-section {
+                padding: 2rem;
+            }
+            .metric-number {
+                font-size: 2.8rem;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 0 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-light);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="bgCanvas" class="bg-canvas"></canvas>
+    <div class="grain-overlay"></div>
+
+    <div class="nav">
+        <div class="theme-toggle" id="themeToggle">
+            <span>✦</span> <span id="themeLabel">Light</span>
+        </div>
+    </div>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero fade-up">
+            <div class="hero-content">
+                <div class="hero-greeting">Alee Asghar</div>
+                <h1 class="hero-title">Enterprise Growth Through<br>Human Connection.</h1>
+                <p class="hero-description">Enterprise Account Manager & Customer Success Leader — 7+ years driving revenue expansion, reducing churn by 35%, and delivering $2.5M+ in new business across 80+ global accounts.</p>
+                <div class="btn-group">
+                    <a href="#contact" class="btn-primary">Let’s connect →</a>
+                    <a href="#experience" class="btn-outline">View experience</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section – editorial layout -->
+        <div class="about-grid fade-up">
+            <div class="about-statement">
+                “Relationships that scale revenue.<br>Systems that earn trust.”
+            </div>
+            <div class="about-text">
+                With over seven years of enterprise SaaS experience, I serve as an Enterprise Account Manager & Customer Success leader at Alachisoft, focusing on full customer lifecycle orchestration — from prospecting and technical onboarding to renewals and expansion. I’ve exceeded 200% quota attainment, generated $2.5M+ in cumulative new business, and drove a 35% reduction in churn through proactive engagement and health scoring. Managing 80+ accounts across financial services, government, and technology sectors, I transform complex technical interest into long-term commercial agreements.
+            </div>
+        </div>
+
+        <!-- Metrics / Achievements with animated counters -->
+        <div class="metrics-grid fade-up" id="metricsSection">
+            <div class="metric-item">
+                <div class="metric-number" data-target="7">0</div><span class="metric-number" style="font-size: 2rem;">+</span>
+                <div class="metric-label">Years Experience</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number" data-target="200">0</div><span class="metric-number" style="font-size: 2rem;">%</span>
+                <div class="metric-label">Quota Attainment</div>
+            </div>
+            <div class="metric-item">
+                <span class="metric-number" data-target="2.5" data-suffix="M">0</span><span class="metric-number" style="font-size: 2rem;">M+</span>
+                <div class="metric-label">New Business Generated</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number" data-target="35">0</div><span class="metric-number" style="font-size: 2rem;">%</span>
+                <div class="metric-label">Churn Reduction</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number" data-target="80">0</div><span class="metric-number" style="font-size: 2rem;">+</span>
+                <div class="metric-label">Enterprise Accounts</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-number" data-target="100">0</div><span class="metric-number" style="font-size: 2rem;">+</span>
+                <div class="metric-label">Sessions / Year</div>
+            </div>
+        </div>
+
+        <!-- Experience Section -->
+        <h2 class="section-headline fade-up" id="experience">Cinematic timeline</h2>
+        <div class="fade-up">
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div><span class="exp-title">Enterprise Account Manager & CSM</span> <span class="exp-company">— Alachisoft (NCache)</span></div>
+                    <div class="exp-date">09/2024 – Present</div>
+                </div>
+                <ul class="exp-list">
+                    <li>200%+ quota attainment: exceeded annual quota in Year 1; $300K closed new revenue by Q2 current year.</li>
+                    <li>35% churn reduction via proactive health scoring & retention plays across 80+ accounts.</li>
+                    <li>$2.5M+ in new business: upsell, cross-sell, expansion across financial, government & media verticals.</li>
+                    <li>Full-cycle ownership: prospecting, onboarding, QBRs, renewals & technical coordination (Azure/AWS).</li>
+                    <li>Key accounts: Jyske Bank, Immigration Canada (IRCC), ZDF, MSCI, Bank of Ireland, Wellfleet.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div><span class="exp-title">Software Sales Executive</span> <span class="exp-company">— Alachisoft (NCache)</span></div>
+                    <div class="exp-date">2023 – 10/2023</div>
+                </div>
+                <ul class="exp-list">
+                    <li>Averaged 2 enterprise demos weekly; full-cycle sales execution for inbound leads & discovery.</li>
+                    <li>Educated senior IT stakeholders on performance advantages over legacy caching systems.</li>
+                    <li>Facilitated infrastructure discovery to align pricing and licensing strategy.</li>
+                </ul>
+            </div>
+            <div class="exp-card">
+                <div class="exp-header">
+                    <div><span class="exp-title">Senior CX Specialist & Product Experience Analyst</span> <span class="exp-company">— US Mobile</span></div>
+                    <div class="exp-date">2021 – 2023</div>
+                </div>
+                <ul class="exp-list">
+                    <li>Pioneered eSIM technology adoption & escalations with Verizon/T-Mobile engineering.</li>
+                    <li>Deep technical root cause analysis for 5G network provisioning and device interoperability.</li>
+                    <li>Acted as liaison across carrier partners, support, and product teams to improve workflows.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Skills Section (interactive) -->
+        <h2 class="section-headline fade-up">Disciplines & tools</h2>
+        <div class="skills-wrapper fade-up">
+            <span class="skill-chip">Customer Lifecycle</span>
+            <span class="skill-chip">Onboarding & QBRs</span>
+            <span class="skill-chip">Renewals & Retention</span>
+            <span class="skill-chip">Churn Prevention</span>
+            <span class="skill-chip">Health Scoring</span>
+            <span class="skill-chip">Expansion Revenue</span>
+            <span class="skill-chip">Azure / AWS / On-Prem</span>
+            <span class="skill-chip">SaaS Architecture</span>
+            <span class="skill-chip">POC Cycles</span>
+            <span class="skill-chip">Salesforce / Pipedrive</span>
+            <span class="skill-chip">AI Prospecting (Claude, GPT)</span>
+            <span class="skill-chip">Stakeholder Management</span>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact" class="contact-section fade-up">
+            <h3 style="font-size: 1.6rem; font-weight: 500;">Elevate your enterprise motion</h3>
+            <div class="contact-email">awanaliasghar@yahoo.com</div>
+            <p style="margin: 1rem 0;">+92 316 803 1155 · Islamabad, Pakistan</p>
+            <p><a href="#" class="social-link" id="linkedinLink">LinkedIn / Alee Asghar →</a></p>
+            <p style="margin-top: 2rem; font-size: 0.85rem;">Open for strategic partnership & leadership opportunities</p>
+        </div>
+
+        <footer>
+            © 2026 Alee Asghar — Engineered with cinematic precision & editorial depth.
+        </footer>
+    </main>
+
+    <script>
+        // ----- THEME TOGGLE (light/dark) with smooth transition -----
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        const body = document.body;
+        
+        function setTheme(theme) {
+            if (theme === 'light') {
+                body.classList.add('light');
+                localStorage.setItem('theme', 'light');
+                themeLabel.innerText = 'Dark';
+            } else {
+                body.classList.remove('light');
+                localStorage.setItem('theme', 'dark');
+                themeLabel.innerText = 'Light';
+            }
+            // refresh canvas background colors based on theme
+            if (window.bgAnimation) window.bgAnimation.updateColors();
+        }
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') setTheme('light');
+        else setTheme('dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const isLight = body.classList.contains('light');
+            setTheme(isLight ? 'dark' : 'light');
+        });
+        
+        // ----- CINEMATIC CANVAS BACKGROUND (animated mesh gradients) -----
+        const canvas = document.getElementById('bgCanvas');
+        let ctx = canvas.getContext('2d');
+        let width, height;
+        let time = 0;
+        let colorStops = {
+            dark: ['#0F1115', '#161A22', '#1F2533', '#2F4156'],
+            light: ['#F5F1EA', '#F9F5EE', '#E8E0D5', '#D8CFC0']
+        };
+        
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        function drawGradientMesh() {
+            if (!ctx) return;
+            const isLight = body.classList.contains('light');
+            const palette = isLight ? colorStops.light : colorStops.dark;
+            const c1 = palette[0];
+            const c2 = palette[1];
+            const c3 = palette[2];
+            const c4 = palette[3];
+            
+            // slow evolving offsets
+            const t = time * 0.06;
+            const xOff1 = Math.sin(t * 0.3) * 0.2;
+            const yOff1 = Math.cos(t * 0.25) * 0.15;
+            const xOff2 = Math.sin(t * 0.5 + 2) * 0.25;
+            const yOff2 = Math.cos(t * 0.4 + 1) * 0.2;
+            
+            const grad1 = ctx.createLinearGradient(width * (0.2 + xOff1), height * (0.1 + yOff1), width * (0.8 - xOff1), height * (0.9 - yOff1));
+            grad1.addColorStop(0, c1);
+            grad1.addColorStop(0.5, c2);
+            grad1.addColorStop(1, c3);
+            
+            const grad2 = ctx.createRadialGradient(width * (0.7 + xOff2), height * (0.3 + yOff2), width * 0.1, width * (0.3 - xOff2), height * (0.7 - yOff2), width * 0.6);
+            grad2.addColorStop(0, c4);
+            grad2.addColorStop(0.7, c2);
+            grad2.addColorStop(1, c1);
+            
+            ctx.globalCompositeOperation = 'source-over';
+            ctx.fillStyle = grad1;
+            ctx.fillRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'soft-light';
+            ctx.fillStyle = grad2;
+            ctx.fillRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'source-over';
+            
+            // add diffused light blur effect
+            const gradBlur = ctx.createLinearGradient(0, height * 0.2, width, height * 0.8);
+            gradBlur.addColorStop(0, 'rgba(176,137,104,0.02)');
+            gradBlur.addColorStop(1, 'rgba(47,65,86,0.05)');
+            ctx.fillStyle = gradBlur;
+            ctx.fillRect(0, 0, width, height);
+        }
+        
+        function animateBackground() {
+            time += 1;
+            drawGradientMesh();
+            requestAnimationFrame(animateBackground);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            drawGradientMesh();
+        });
+        
+        resizeCanvas();
+        animateBackground();
+        
+        window.bgAnimation = { updateColors: () => { drawGradientMesh(); } };
+        
+        // ----- SCROLL REVEAL (Intersection Observer) + Counters animation -----
+        const fadeElements = document.querySelectorAll('.fade-up');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+        
+        fadeElements.forEach(el => observer.observe(el));
+        
+        // Counter animation logic
+        const metricNumbers = document.querySelectorAll('.metric-number[data-target]');
+        let countersStarted = false;
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries.some(e => e.isIntersecting) && !countersStarted) {
+                countersStarted = true;
+                metricNumbers.forEach(counter => {
+                    const target = parseFloat(counter.getAttribute('data-target'));
+                    const suffix = counter.getAttribute('data-suffix') || '';
+                    let current = 0;
+                    const increment = target / 45;
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            let displayValue = Math.floor(current);
+                            if (suffix === 'M') displayValue = current.toFixed(1);
+                            counter.innerText = displayValue;
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target + (suffix === 'M' ? '' : '');
+                            if (suffix === 'M') counter.innerText = target;
+                        }
+                    };
+                    updateCounter();
+                });
+                counterObserver.disconnect();
+            }
+        }, { threshold: 0.4 });
+        
+        const metricsContainer = document.getElementById('metricsSection');
+        if (metricsContainer) counterObserver.observe(metricsContainer);
+        
+        // pre-set the visible class for hero to appear instantly
+        setTimeout(() => {
+            document.querySelector('.hero')?.classList.add('visible');
+        }, 100);
+        
+        // Magnetic hover effect on cards (subtle elevation)
+        const cards = document.querySelectorAll('.exp-card, .metric-item, .skill-chip');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xMove = (x / rect.width - 0.5) * 6;
+                const yMove = (y / rect.height - 0.5) * 6;
+                card.style.transform = `perspective(800px) rotateY(${xMove * 0.8}deg) rotateX(${yMove * -0.5}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+        
+        // LinkedIn link update (dummy interaction)
+        const linkedinLink = document.getElementById('linkedinLink');
+        if (linkedinLink) {
+            linkedinLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open('https://www.linkedin.com/in/aleeashgar007', '_blank');
+            });
+        }
+        
+        // smooth anchor scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === "#" || href === "") return;
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
